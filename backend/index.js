@@ -11,6 +11,9 @@ const port = process.env.PORT || 5000;
 const newsletter_routes=require('../backend/routes/newsletter');
 
 app.use('/api',newsletter_routes);
+app.get('/', async(req,res)=>{
+  res.json("Hello DB");
+  });
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

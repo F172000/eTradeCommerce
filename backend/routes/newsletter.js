@@ -3,9 +3,7 @@ const router=express.Router();
 const fs = require('fs'); // Import the fs module
 const path = require('path');
 const Controller = require('../controllers/newsletter');
-router.get('/', async(req,res)=>{
-res.json("Hello DB");
-});
+
 router.post('/subscribe', async (req, res) => {
     const { email } = req.body;
   
