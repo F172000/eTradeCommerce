@@ -31,5 +31,18 @@ router.post('/subscribe', async (req, res) => {
     }
   });
   
+  router.post('/sendnewsletter', async (req, res) => {
+    try {
+      const templatePath = path.join(__dirname, 'News.html'); // Adjust the path as needed
+      const newslettertemplate = fs.readFileSync(templatePath, 'utf8');
+     const result =await Controller.sendNewsletter(newslettertemplate,res);
+    if(result){
+      res.status(200).json({message:"emails are send to all subscribers successfully"});
+    }
+    } catch (error) {
+      console.error('Error sending newsletter:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
   module.exports = router;
   

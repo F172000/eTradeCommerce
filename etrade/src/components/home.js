@@ -3,23 +3,13 @@ import { Link } from 'react-router-dom';
 import "../css/style.css";
 import icon1 from "../img/logo.png";
 import main from "../img/sideimg.png";
-import back from "../img/main.png";
 import { toast } from 'react-toastify';
+import DotLoader from "react-spinners/DotLoader";
 import axios from 'axios';
 axios.defaults.baseURL=process.env.REACT_APP_SERVER_DOMAIN;
 export default function Home() {
-    const [isLoading, setIsLoading] = useState(true);
+    const [spinning,setspinning]=useState(true);
     const [email, setEmail] = useState('');
-    useEffect(() => {
-        const loadingTimeout = setTimeout(() => {
-          setIsLoading(false);
-        }, 3000);
-    
-        // Cleanup the timeout if the component unmounts
-        return () => {
-          clearTimeout(loadingTimeout);
-        };
-      }, []);
 
       const data={
         email:email
@@ -27,9 +17,10 @@ export default function Home() {
 
       const handleSubscribe = async () => {
         try {
+            setspinning(!spinning);
             const response = await axios.post('http://localhost:3001/api/subscribe',data);
-        
             if (response.status === 201) {
+                setspinning(false);
                 toast(response.data.message,{
                     icon: <svg color='green' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -51,6 +42,7 @@ export default function Home() {
               setEmail('');
             }
           } catch (error) {
+            setspinning(false);
             toast(error.response.data.error,{
                 icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path color='red' strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
@@ -74,14 +66,11 @@ export default function Home() {
   };
 
   return (
-    <div>
-          {isLoading ? (
-        <div id="spinner" 
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-blue" role="status"></div>
-    </div>
-          ):(
-    <>
+    <div >
+    {
+        spinning &&  <DotLoader color="#36d7b7" />
+    }
+   
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
         <Link to="index.html" class="navbar-brand d-flex align-items-center">
             <h2 class="m-0 text-blue"><img class="img-fluid logo-fluid me-0" src={icon1} alt=""
@@ -441,9 +430,6 @@ Growing Agency</p>
 
 
     {/* <!-- JavaScript Libraries --> */}
-    
-    </>
-    )}
     </div>
   )
 }
