@@ -8,7 +8,7 @@ import DotLoader from "react-spinners/DotLoader";
 import axios from 'axios';
 axios.defaults.baseURL=process.env.REACT_APP_SERVER_DOMAIN;
 export default function Home() {
-    const [spinning,setspinning]=useState(true);
+    const [spinning,setspinning]=useState(false);
     const [email, setEmail] = useState('');
 
       const data={
