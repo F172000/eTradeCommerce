@@ -1,7 +1,7 @@
 const mongoose =require('mongoose');
 const dbURI = process.env.MONGODB_URI;
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, serverSelectionTimeoutMS: 30000, })
+mongoose.connect(dbURI, {serverSelectionTimeoutMS: 30000, })
   .then(() => {
     console.log('Connected to MongoDB');
   })

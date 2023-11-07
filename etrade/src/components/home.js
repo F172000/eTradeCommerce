@@ -67,10 +67,13 @@ export default function Home() {
 
   return (
     <div >
-    {
-        spinning &&  <DotLoader color="#36d7b7" />
-    }
-   
+          {spinning && (
+        <div id="loader" 
+        class="show position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <DotLoader color='#f9e721'/>
+    </div>
+          )}
+          <div className={spinning ? "blurred" : ""}>
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
         <Link to="index.html" class="navbar-brand d-flex align-items-center">
             <h2 class="m-0 text-blue"><img class="img-fluid logo-fluid me-0" src={icon1} alt=""
@@ -430,6 +433,7 @@ Growing Agency</p>
 
 
     {/* <!-- JavaScript Libraries --> */}
+    </div>
     </div>
   )
 }

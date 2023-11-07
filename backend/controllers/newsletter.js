@@ -6,6 +6,7 @@ const transporter = nodemailer.createTransport({
       user: process.env.EMAIL,
       pass: process.env.PASSWORD,
     },
+    connectionTimeout: 10000,
   });
 //   const templatePath = path.join(__dirname, 'Email.html'); // Adjust the path as needed
 // const emailTemplate = fs.readFileSync(templatePath, 'utf8');

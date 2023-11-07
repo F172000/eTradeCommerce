@@ -393,37 +393,18 @@ h6,
         width: 45px; /* Adjust width for small screens */
       }
 }
-.my-component {
-    position: relative;
-  }
-  
-  .spinner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.6);
-    z-index: 999;
-  }
-  
-  .spinner-overlay.show {
-    display: flex;
-  }
-  
-  .content {
-    display: block;
-  }
-  
-  .content.hide {
-    display: none;
-  }
-  #loader.show{
-    display: flex;
-  }
-  #loader.hide{
-    display: none;
+#loader.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+#loader {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+.blurred {
+    filter: blur(5px); /* Apply a 5px blur to the content */
+    transition: filter 0.3s; /* Add a transition effect for the blur */
   }
