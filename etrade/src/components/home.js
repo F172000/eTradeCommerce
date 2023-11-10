@@ -18,7 +18,7 @@ export default function Home() {
       const handleSubscribe = async () => {
         try {
             setspinning(!spinning);
-            const response = await axios.post('http://localhost:3001/api/subscribe',data);
+            const response = await axios.post('/api/subscribe',data);
             if (response.status === 201) {
                 setspinning(false);
                 toast(response.data.message,{
